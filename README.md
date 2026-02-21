@@ -12,8 +12,8 @@ further analyses and integration of the previous datasets with other published d
 It is highly recommanded to run all our scripts using our docker images available on the hedgelab docker repository to ensure reproducibility.
 
 ### O-MAP data processing
-# RNA ChIP data processing
-# DNA ChIP data processing
+## RNA ChIP data processing
+## DNA ChIP data processing
 
 ## bulk data processing
 
