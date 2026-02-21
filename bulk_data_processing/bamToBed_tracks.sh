@@ -1,5 +1,4 @@
 #!/bin/bash
-#docker hedgelab/hic_pipeline:image15
 
 #convert bam files to wig
 #RBM20

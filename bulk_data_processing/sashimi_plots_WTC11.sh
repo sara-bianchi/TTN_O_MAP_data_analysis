@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#docker run -d -v $PWD:/home/shared_folder --name sashimi hedgelab/sashimiplot:image1
-
 mkdir /home/shared_folder/sashimi_WTC11
 mkdir /home/shared_folder/sashimi_WTC11/WT_vs_RBM20KO
 mkdir /home/shared_folder/sashimi_WTC11/WT_vs_TTNKO
