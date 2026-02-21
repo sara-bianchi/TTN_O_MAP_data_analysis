@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#docker run -d -v $PWD:/home/shared_folder --name sashimi hedgelab/sashimiplot:image1
+
+mkdir /home/shared_folder/sashimi_RUES2
+mkdir /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO
+mkdir /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO
+mkdir /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO
+
+#sashimi plots
+rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_RBM20KO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO/A3SS.MATS.JC.txt --event-type A3SS -o /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO/A3SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO.gf
+rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_RBM20KO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO/A5SS.MATS.JC.txt --event-type A5SS -o /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO/A5SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO.gf
+rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_RBM20KO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO/RI.MATS.JC.txt --event-type RI -o /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO/RI --group-info /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO.gf
+rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_RBM20KO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO/MXE.MATS.JC.txt --event-type MXE -o /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO/MXE --group-info /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO.gf
+rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_RBM20KO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO/SE.MATS.JC.txt --event-type SE -o /home/shared_folder/sashimi_RUES2/WT_vs_RBM20KO/SE --group-info /home/shared_folder/rmats_RUES2/WT_vs_RBM20KO.gf
+
+mkdir /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO
+rmats2sashimiplot --l1 WT --l2 TTNKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNKO/A3SS.MATS.JC.txt --event-type A3SS -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO/A3SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNKO/A5SS.MATS.JC.txt --event-type A5SS -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO/A5SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNKO/RI.MATS.JC.txt --event-type RI -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO/RI --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNKO/MXE.MATS.JC.txt --event-type MXE -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO/MXE --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNKO/SE.MATS.JC.txt --event-type SE -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNKO/SE --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNKO.gf
+
+mkdir /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO
+rmats2sashimiplot --l1 WT --l2 TTNpromKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNpromKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO/A3SS.MATS.JC.txt --event-type A3SS -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO/A3SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNpromKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNpromKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO/A5SS.MATS.JC.txt --event-type A5SS -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO/A5SS --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNpromKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNpromKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO/RI.MATS.JC.txt --event-type RI -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO/RI --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNpromKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNpromKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO/MXE.MATS.JC.txt --event-type MXE -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO/MXE --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO.gf
+rmats2sashimiplot --l1 WT --l2 TTNpromKO --b1 /home/shared_folder/rmats_RUES2/samples_WT.txt --b2 /home/shared_folder/rmats_RUES2/samples_TTNpromKO.txt -e /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO/SE.MATS.JC.txt --event-type SE -o /home/shared_folder/sashimi_RUES2/WT_vs_TTNpromKO/SE --group-info /home/shared_folder/rmats_RUES2/WT_vs_TTNpromKO.gf
