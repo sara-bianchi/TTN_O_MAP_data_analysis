@@ -16,7 +16,7 @@ For this step it is required to use the scripts in the folder O-MAP_data_prcessi
 Place the files and the scripts in the respective folders (RNA_ChIP_data_processing and DNA_ChIP_data_processing), make the scripts executable, and download the fastq files for the RNA ChIP pulldown and input in a subfolder RNA_ChIP_data_processing/fastq
 
 #### RNA ChIP data processing
-RNA ChIP data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the RNA_ChIP_data_processing folder
+RNA ChIP data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the RNA_ChIP_data_processing folder as following:
 
 1) STAR geome index generation and alignment of input and pulldown data
    
@@ -27,41 +27,44 @@ RNA ChIP data anlysis consits of different steps requiring different docker imag
    
 2) Conversion of BAM files to .bed tracks on the TTN genes, normalization on the coverage and generation of .bedGraph tracks with the log2FC pulldown/input
 
-       docker exec -it RNA_ChIP_STAR /bin/bash
+       docker pull hedgelab/?
+       docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_introns hedgelab/?
+       docker exec -it RNA_ChIP_introns /bin/bash
        ./bamToBed_input.sh
        ./bamToBed_pulldown.sh
        Rscript script_introns_alignment.R
    
-3) rMATS analysis of differential splicing events from STAR BAM files of pulldown data and sashimi plots generation
+4) rMATS analysis of differential splicing events from STAR BAM files of pulldown data and sashimi plots generation
 
        docker pull hedgelab/rmast:image1
-       docker run -itv ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name RNA:ChIP_rMATS hedgelab/rmast:image1 /bin/bash
+       docker run -itv ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name RNA_ChIP_rMATS hedgelab/rmast:image1 /bin/bash
        /home/shared_folder/splicing_variants_analysis.sh
    
        docker pull hedgelab/hedgelab/sashimiplot:image1
-       sudo docker run -d -v $PWD:/home/shared_folder --name RNA:ChIP_sashimi hedgelab/sashimiplot:image1
+       docker run -d -v $PWD:/home/shared_folder --name RNA_ChIP_sashimi hedgelab/sashimiplot:image1
+       docker exec -it RNA_ChIP_sashimi /bin/bash
        /home/shared_folder/script_sashimi.sh
    
-4) BWA alignment of input and pulldown data
+6) BWA alignment of input and pulldown data
 
        docker pull hedgelab/ciriquant:image1
        docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_CIRIquant hedgelab/ciriquant:image1
        docker exec -it RNA_ChIP_CIRIquant /bin/bash
        /home/shared_folder/BWA_alignment.sh
    
-5) CIRI2 detection of circRNAs
+7) CIRI2 detection of circRNAs
 
        docker pull hedgelab/ciri_full:image3
        docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_CIRI2 hedgelab/ciri_full:image3
        docker exec -it RNA_ChIP_CIRI2 /bin/bash
        /home/shared_folder/CIRI2.sh
    
-6) Quantification of differentially expressed circRNAs with CIRIquant
+8) Quantification of differentially expressed circRNAs with CIRIquant
 
        docker exec -it RNA_ChIP_CIRIquant /bin/bash
        /home/shared_folder/CIRIquant.sh
    
-7) O-MAP probes alignment and generation of .bed tracks for differentially enriched TTN introns and circRNAs or WT and ΔRBM20
+9) O-MAP probes alignment and generation of .bed tracks for differentially enriched TTN introns and circRNAs or WT and ΔRBM20
 
        docker pull hedgelab/crispr:image1
        docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_tracks hedgelab/crispr:image1
@@ -78,8 +81,43 @@ The analysis can be run on our docker hedgelab/? and it canbe performed by runni
      docker exec -it DNA_ChIP /bin/bash
      /home/shared_folder/chromatin_O-MAP_analysis.sh
 
+
 ## bulk data processing
+For this step it is required to use the scripts in the folder bulk_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/bulk_data_processing.gz/content.
+Place the files and the scripts in the same folder, make the scripts executable, and download the fastq files for the RUES2 CMs, WTC11 CMs and RUES2 KD CMs in a subfolder bulk_data_processing/fastq
+
+Bulk data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the bulk_data_processing folder as following:
+1) STAR geome index generation, trimming, alignment, counts filtering, TPM normalization, PCA, WGCNA modules analysis, differential gene expression, and GSEA analyses
+   
+       docker pull hedgelab/bulk_image:image3
+       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=bulk_DGE hedgelab/bulk_image:image3
+       docker exec -it bulk_DGE /bin/bash
+       ./DGE_data_analysis.sh
+   
+2) For RUES2 CMs onversion of BAM files to .bed tracks on the TTN and RBM20 genes
+
+       docker pull hedgelab/?
+       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=RUES2_tracks hedgelab/?
+       docker exec -it RUES2_tracks /bin/bash
+       ./bamToBed_tracks.sh
+   
+4) rMATS analysis of differential splicing events from STAR BAM files of pulldown data and sashimi plots generation
+
+       docker pull hedgelab/rmast:image1
+       docker run -itv ../bulk_data_processing:/home/shared_folder --privileged=true --name bulk_data_rMATS hedgelab/rmast:image1 /bin/bash
+       /home/shared_folder/splicing_variants_analysis.sh
+   
+       docker pull hedgelab/hedgelab/sashimiplot:image1
+       docker run -d -v $PWD:/home/shared_folder --name bulk_data_sashimi hedgelab/sashimiplot:image1
+       docker exec -it bulk_data_sashimi /bin/bash
+       /home/shared_folder/sashimi_plots_RUES2.sh
+       /home/shared_folder/sashimi_plots_WTC11.sh
+
 
 ## HiC data processing
 
 ## processed data analysis
+
+For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to Refer to our GitHubs:
+- bulk RNAseq pipeline (https://github.com/sara-bianchi/Bulk_RNA_seq_pipeline)
+- Hi-c pipeline (https://github.com/sara-bianchi/HiC_pipeline)
