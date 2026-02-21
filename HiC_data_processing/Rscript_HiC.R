@@ -43,8 +43,8 @@ set.seed(1234)
 pal = c("#3283FE", "#FA0087", "#009E73", "#FBE426", "#56B4E9", "#FEAF16", "#DEA0FD", "#1CBE4F", "#F6222E", "#1CFFCE", "#325A9B", "#AA0DFE","#D55E00", "#2ED9FF", "#f0E442", "#1C8356", "#0072B2", "#CC79A7")
 
 current_time = format(Sys.time(), "%y%m%d")
-dir.create(paste0("/home/shared_folder/output_", current_time))
-system2("chmod", paste0("-R 777 /home/shared_folder/output_", current_time))
+dir.create("/home/shared_folder/output_HiC")
+system2("chmod", paste0("-R 777 /home/shared_folder/output_HiC"))
 
 #upload settings
 print("uploading settings")
@@ -262,9 +262,9 @@ if(indexing == TRUE){
   if(aligner == "HiC-pro"){
     print("starting bowtie index generation")
       
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/bowtie_index/"))
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/bowtie_index/", genome))
-    genome_folder = paste0("/home/shared_folder/output_", current_time, "/bowtie_index/")
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/bowtie_index/"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/bowtie_index/", genome))
+    genome_folder = paste0("/home/shared_folder/ooutput_HiC/bowtie_index/")
     system2("bowtie2-build", paste0(fasta, " ", genome))
     system2("mv", paste0(genome, "* ", genome_folder))
   }
@@ -278,13 +278,13 @@ if(alignment == TRUE){
     #set up config-hicpro.txt file
     print("starting HiC-pro alignment")
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/HiC_pro/"))
-    system2("cp", paste0("/HiC-Pro_3.1.0/config-hicpro.txt", " /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
-    system2("chmod", paste0("777 /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/HiC_pro/"))
+    system2("cp", paste0("/HiC-Pro_3.1.0/config-hicpro.txt", " /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("chmod", paste0("777 /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
     
     if(RE == "Dnase"){
-      system2("sed", paste0("-i 's|GENOME_FRAGMENT = HindIII_resfrag_hg19.bed|GENOME_FRAGMENT =|g' /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|GENOME_FRAGMENT = HindIII_resfrag_hg19.bed|GENOME_FRAGMENT =|g' /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
     } else{
       enzymes = ""
       enzymes2 = ""
@@ -292,33 +292,33 @@ if(alignment == TRUE){
         enzymes = paste0(enzymes, tolower(i), " ")
         enzymes2 =paste0(enzymes2, i, "_")
       }
-      system2("/HiC-Pro_3.1.0/bin/utils/digest_genome.py", paste0("-r ", enzymes, "-o /home/shared_folder/output_", current_time, "/HiC_pro/", genome, "_", enzymes2, "fragments.bed ", fasta))
-      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+      system2("/HiC-Pro_3.1.0/bin/utils/digest_genome.py", paste0("-r ", enzymes, "-o /home/shared_folder/ooutput_HiC/HiC_pro/", genome, "_", enzymes2, "fragments.bed ", fasta))
+      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
     }
     
-    system2("sed", paste0("-i 's|N_CPU = 2|N_CPU = ", as.character(CPU), "|g' ", "/home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
-    system2("sed", paste0("-i 's|BOWTIE2_IDX_PATH =|BOWTIE2_IDX_PATH = ", genome_folder, "|g' ", "/home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
-    system2("sed", paste0("-i 's|REFERENCE_GENOME = hg19|REFERENCE_GENOME = ", genome, "|g' ", "/home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
-    system2("sed", paste0("-i 's|GENOME_SIZE = chrom_hg19.sizes|GENOME_SIZE = ", chr_sizes_path, "|g' ", "/home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("sed", paste0("-i 's|N_CPU = 2|N_CPU = ", as.character(CPU), "|g' ", "/home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("sed", paste0("-i 's|BOWTIE2_IDX_PATH =|BOWTIE2_IDX_PATH = ", genome_folder, "|g' ", "/home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("sed", paste0("-i 's|REFERENCE_GENOME = hg19|REFERENCE_GENOME = ", genome, "|g' ", "/home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("sed", paste0("-i 's|GENOME_SIZE = chrom_hg19.sizes|GENOME_SIZE = ", chr_sizes_path, "|g' ", "/home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
     
     bins = ""
     for(i in binning){
       bins = paste0(bins, i, " ")
     }
     
-    system2("sed", paste0("-i 's|BIN_SIZE = 20000 40000 150000 500000 1000000|BIN_SIZE = ", bins, "|g' ", "/home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("sed", paste0("-i 's|BIN_SIZE = 20000 40000 150000 500000 1000000|BIN_SIZE = ", bins, "|g' ", "/home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
     
     #set up directories with files
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/HiC_pro/input"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/HiC_pro/input"))
     
     for(i in 1:length(rownames(table))){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/HiC_pro/input/", table$sample_ID[i]))
-      system2("mv", paste0(table$fastq1[i], " /home/shared_folder/output_", current_time, "/HiC_pro/input/", table$sample_ID[i], "/", table$sample_ID[i], "_R1.fastq.gz"))
-      system2("mv", paste0(table$fastq2[i], " /home/shared_folder/output_", current_time, "/HiC_pro/input/", table$sample_ID[i], "/", table$sample_ID[i], "_R2.fastq.gz"))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/HiC_pro/input/", table$sample_ID[i]))
+      system2("mv", paste0(table$fastq1[i], " /home/shared_folder/ooutput_HiC/HiC_pro/input/", table$sample_ID[i], "/", table$sample_ID[i], "_R1.fastq.gz"))
+      system2("mv", paste0(table$fastq2[i], " /home/shared_folder/ooutput_HiC/HiC_pro/input/", table$sample_ID[i], "/", table$sample_ID[i], "_R2.fastq.gz"))
     }
     
     #run HiC-pro
-    system2("/HiC-Pro_3.1.0/bin/HiC-Pro", paste0("-i /home/shared_folder/output_", current_time, "/HiC_pro/input/ -o /home/shared_folder/output_", current_time, "/HiC_pro/output -c /home/shared_folder/output_", current_time, "/HiC_pro/config-hicpro_", current_time, ".txt"))
+    system2("/HiC-Pro_3.1.0/bin/HiC-Pro", paste0("-i /home/shared_folder/ooutput_HiC/HiC_pro/input/ -o /home/shared_folder/ooutput_HiC/HiC_pro/output -c /home/shared_folder/ooutput_HiC/HiC_pro/config-hicpro_", current_time, ".txt"))
   }
 }
 
@@ -334,9 +334,9 @@ if(analysis == TRUE){
       path_mcool = c()
       path_bias = c()
       for(i in 1:length(rownames(table))){
-        matrix_i = paste0("/home/shared_folder/output_", current_time, "/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix")
-        bed_i = paste0("/home/shared_folder/output_", current_time, "/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/raw/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_abs.bed")
-        bias_i = paste0("/home/shared_folder/output_", current_time, "/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix.biases")
+        matrix_i = paste0("/home/shared_folder/ooutput_HiC/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix")
+        bed_i = paste0("/home/shared_folder/ooutput_HiC/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/raw/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_abs.bed")
+        bias_i = paste0("/home/shared_folder/ooutput_HiC/HiC_pro/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix.biases")
         path_matrix = append(path_matrix, matrix_i)
         path_bed = append(path_bed, bed_i)
         path_bias = append(path_bias, bias_i)
@@ -368,6 +368,21 @@ if(analysis == TRUE){
         paths = data.frame(samples, table$matrix, table$bed)
         colnames(paths) = c("sample_ID", paste0("raw_matrix_", as.character(j)), paste0("bed_", as.character(j)))
         table = table %>% dplyr::left_join(paths, by = "sample_ID")
+        
+        dir.create(paste0("/home/shared_folder/ooutput_HiC/mcool_raw"))
+        path_mcool = c()
+        for(i in 1:length(rownames(table))){
+          matrix_i = table$matrix[i]
+          bed_i = table$bed[i]
+          out_i = paste0("/home/shared_folder/ooutput_HiC/mcool_raw/", table$sample_ID[i], ".mcool")
+          
+          system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --bedFileHicpro ", bed_i, " --inputFormat hicpro --outputFormat mcool --outFileName ", out_i))
+          path_mcool = append(path_mcool, out_i)
+        }
+        
+        paths = data.frame(samples, path_mcool)
+        colnames(paths) = c("sample_ID", "raw_mcool")
+        table = table %>% dplyr::left_join(paths, by = "sample_ID")
       }
       
     } else {
@@ -378,9 +393,9 @@ if(analysis == TRUE){
       if(is_hic == 0){
         
         #hic to HiC-pro
-        dir.create(paste0("/home/shared_folder/output_", current_time, "/format_conversion"))
+        dir.create(paste0("/home/shared_folder/ooutput_HiC/format_conversion"))
         
-        out = paste0("/home/shared_folder/output_", current_time, "/format_conversion/")
+        out = paste0("/home/shared_folder/ooutput_HiC/format_conversion/")
         paths = table %>% dplyr::select(c("sample_ID", "matrix"))
         path_matrix = c()
         path_bed = c()
@@ -429,11 +444,11 @@ if(analysis == TRUE){
           #others (hic/homer)
           
           if(normalized == TRUE){
-            dir.create(paste0("/home/shared_folder/output_", current_time, "/mcool_iced"))
+            dir.create(paste0("/home/shared_folder/ooutput_HiC/mcool_iced"))
             path_mcool = c()
             for(i in 1:length(rownames(table))){
               matrix_i = table$matrix[i]
-              out_i = paste0("/home/shared_folder/output_", current_time, "/mcool_iced/", table$sample_ID[i], ".mcool")
+              out_i = paste0("/home/shared_folder/ooutput_HiC/mcool_iced/", table$sample_ID[i], ".mcool")
               
               system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --inputFormat ", table$format[i], " --outputFormat mcool --outFileName ", out_i))
               path_mcool = append(path_mcool, out_i)
@@ -443,11 +458,11 @@ if(analysis == TRUE){
             table = table %>% dplyr::left_join(paths, by = "sample_ID")
             
           } else {
-            dir.create(paste0("/home/shared_folder/output_", current_time, "/mcool_raw"))
+            dir.create(paste0("/home/shared_folder/ooutput_HiC/mcool_raw"))
             path_mcool = c()
             for(i in 1:length(rownames(table))){
               matrix_i = table$matrix[i]
-              out_i = paste0("/home/shared_folder/output_", current_time, "/mcool_raw/", table$sample_ID[i], ".mcool")
+              out_i = paste0("/home/shared_folder/ooutput_HiC/mcool_raw/", table$sample_ID[i], ".mcool")
               
               system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --inputFormat ", table$format[i], " --outputFormat mcool --outFileName ", out_i))
               path_mcool = append(path_mcool, out_i)
@@ -460,10 +475,10 @@ if(analysis == TRUE){
       }
       
       #mcool/cool to HiC-pro
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/format_conversion"))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/format_conversion"))
       for(j in res){
-        dir.create(paste0("/home/shared_folder/output_", current_time, "/format_conversion/", as.character(j)))
-        out_j = paste0("/home/shared_folder/output_", current_time, "/format_conversion/", as.character(j), "/")
+        dir.create(paste0("/home/shared_folder/ooutput_HiC/format_conversion/", as.character(j)))
+        out_j = paste0("/home/shared_folder/ooutput_HiC/format_conversion/", as.character(j), "/")
         
         if(normalized == TRUE){
           paths = table %>% dplyr::select(c("sample_ID", "iced_mcool"))
@@ -506,39 +521,39 @@ if(analysis == TRUE){
   if(normalization == TRUE){
     
     #HiC-pro normalization
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/ICE_normalization"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/ICE_normalization"))
     
     for(j in res){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j)))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j)))
       
-      system2("cp", paste0("/HiC-Pro_3.1.0/config-hicpro.txt", " /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("chmod", paste0("777 /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("cp", paste0("/HiC-Pro_3.1.0/config-hicpro.txt", " /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("chmod", paste0("777 /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
       
-      system2("sed", paste0("-i 's|GENOME_FRAGMENT = HindIII_resfrag_hg19.bed|GENOME_FRAGMENT =|g' /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|N_CPU = 2|N_CPU = ", as.character(CPU), "|g' ", "/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|BOWTIE2_IDX_PATH =|BOWTIE2_IDX_PATH = ", genome_folder, "|g' ", "/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|REFERENCE_GENOME = hg19|REFERENCE_GENOME = ", genome, "|g' ", "/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|GENOME_SIZE = chrom_hg19.sizes|GENOME_SIZE = ", chr_sizes_path, "|g' ", "/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
-      system2("sed", paste0("-i 's|BIN_SIZE = 20000 40000 150000 500000 1000000|BIN_SIZE = ", as.character(j), "|g' ", "/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|GENOME_FRAGMENT = HindIII_resfrag_hg19.bed|GENOME_FRAGMENT =|g' /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|LIGATION_SITE = AAGCTAGCTT|LIGATION_SITE =|g' /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|N_CPU = 2|N_CPU = ", as.character(CPU), "|g' ", "/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|BOWTIE2_IDX_PATH =|BOWTIE2_IDX_PATH = ", genome_folder, "|g' ", "/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|REFERENCE_GENOME = hg19|REFERENCE_GENOME = ", genome, "|g' ", "/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|GENOME_SIZE = chrom_hg19.sizes|GENOME_SIZE = ", chr_sizes_path, "|g' ", "/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
+      system2("sed", paste0("-i 's|BIN_SIZE = 20000 40000 150000 500000 1000000|BIN_SIZE = ", as.character(j), "|g' ", "/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt"))
       
       #set up directories with files
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/input"))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/input"))
       
       paths = table %>% dplyr::select(c("sample_ID", paste0("raw_matrix_", as.character(j))))
       colnames(paths) = c("sample_ID", "raw_matrix")
       for(i in 1:length(rownames(paths))){
-        dir.create(paste0("/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/input/", paths$sample_ID[i]))
-        system2("cp", paste0(paths$raw_matrix[i], " /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/input/", paths$sample_ID[i], "/"))
+        dir.create(paste0("/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/input/", paths$sample_ID[i]))
+        system2("cp", paste0(paths$raw_matrix[i], " /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/input/", paths$sample_ID[i], "/"))
       }
       
-      system2("/HiC-Pro_3.1.0/bin/HiC-Pro", paste0("-i /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/input -o /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/output -c /home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt -s ice_norm"))
+      system2("/HiC-Pro_3.1.0/bin/HiC-Pro", paste0("-i /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/input -o /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/output -c /home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/config-hicpro_", current_time, ".txt -s ice_norm"))
       
       path_matrix = c()
       path_bias = c()
       for(i in 1:length(rownames(paths))){
-        matrix_i = paste0("/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix")
-        bias_i = paste0("/home/shared_folder/output_", current_time, "/ICE_normalization/", as.character(j), "/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix.biases")
+        matrix_i = paste0("/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix")
+        bias_i = paste0("/home/shared_folder/ooutput_HiC/ICE_normalization/", as.character(j), "/output/hic_results/matrix/", table$sample_ID[i], "/iced/", as.character(j), "/", table$sample_ID[i], "_", as.character(j), "_iced.matrix.biases")
         path_matrix = append(path_matrix, matrix_i)
         path_bias = append(path_bias, bias_i)
       }
@@ -551,17 +566,17 @@ if(analysis == TRUE){
   if(normalization == TRUE | "bias" %in% colnames(table) | normalized == TRUE){
     
     #iced mcool conversion
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/mcool_iced"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/mcool_iced"))
     
     for(j in res){
       paths = table %>% dplyr::select(c("sample_ID", paste0("iced_matrix_", as.character(j)), paste0("bed_", as.character(j))))
       colnames(paths) = c("sample_ID", "iced_matrix", "bed")
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/mcool_iced/", as.character(j)))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/mcool_iced/", as.character(j)))
       path_mcool = c()
       for(i in 1:length(rownames(paths))){
         matrix_i = paths$iced_matrix[i]
         bed_i = paths$bed[i]
-        out_i = paste0("/home/shared_folder/output_", current_time, "/mcool_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.mcool")
+        out_i = paste0("/home/shared_folder/ooutput_HiC/mcool_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.mcool")
         system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --bedFileHicpro ", bed_i, " --inputFormat hicpro --outputFormat mcool --outFileName ", out_i))
         path_mcool = append(path_mcool, out_i)
       }
@@ -575,18 +590,18 @@ if(analysis == TRUE){
   if(untargeted_analysis == TRUE){
     
     #iced h5 conversion
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/h5_iced"))
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/cool_iced"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/h5_iced"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/cool_iced"))
     
     for(j in res_untargeted){
       paths = table %>% dplyr::select(c("sample_ID", paste0("iced_matrix_", as.character(j)), paste0("bed_", as.character(j))))
       colnames(paths) = c("sample_ID", "iced_matrix", "bed")
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/h5_iced/", as.character(j)))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/h5_iced/", as.character(j)))
       path_h5 = c()
       for(i in 1:length(rownames(paths))){
         matrix_i = paths$iced_matrix[i]
         bed_i = paths$bed[i]
-        out_i = paste0("/home/shared_folder/output_", current_time, "/h5_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.h5")
+        out_i = paste0("/home/shared_folder/ooutput_HiC/h5_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.h5")
         system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --bedFileHicpro ", bed_i, " --inputFormat hicpro --outputFormat h5 --outFileName ", out_i))
         path_h5 = append(path_h5, out_i)
       }
@@ -599,12 +614,12 @@ if(analysis == TRUE){
     for(j in res_untargeted){
       paths = table %>% dplyr::select(c("sample_ID", paste0("iced_matrix_", as.character(j)), paste0("bed_", as.character(j))))
       colnames(paths) = c("sample_ID", "iced_matrix", "bed")
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/cool_iced/", as.character(j)))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/cool_iced/", as.character(j)))
       path_cool = c()
       for(i in 1:length(rownames(paths))){
         matrix_i = paths$iced_matrix[i]
         bed_i = paths$bed[i]
-        out_i = paste0("/home/shared_folder/output_", current_time, "/cool_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.cool")
+        out_i = paste0("/home/shared_folder/ooutput_HiC/cool_iced/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j), "_iced.cool")
         system2("hicConvertFormat", paste0("--matrices ", matrix_i, " --bedFileHicpro ", bed_i, " --inputFormat hicpro --outputFormat cool --outFileName ", out_i))
         path_cool = append(path_cool, out_i)
       }
@@ -620,51 +635,51 @@ if(analysis == TRUE){
 
 #ANALYSIS - untargeted
 if(untargeted_analysis == TRUE){
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/TADs"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/autocorrelation"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/ratio"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/HiCrep"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/diff_loops"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/IGV"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/gsea"))
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/genomeTracks"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/TADs"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/autocorrelation"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/ratio"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/HiCrep"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/diff_loops"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/IGV"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/gsea"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/genomeTracks"))
   
   for(j in res_untargeted){
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/TADs/", as.character(j)))
-    TADs_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/TADs/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/TADs/", as.character(j)))
+    TADs_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/TADs/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/autocorrelation/", as.character(j)))
-    autocorr_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/autocorrelation/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/autocorrelation/", as.character(j)))
+    autocorr_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/autocorrelation/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/ratio/", as.character(j)))
-    ratio_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/ratio/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/ratio/", as.character(j)))
+    ratio_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/ratio/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/HiCrep/", as.character(j)))
-    HiCrep_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/HiCrep/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/HiCrep/", as.character(j)))
+    HiCrep_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/HiCrep/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j)))
-    dcHiC_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j)))
+    dcHiC_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/diff_loops/", as.character(j)))
-    diff_loops_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/diff_loops/", as.character(j))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/diff_loops/", as.character(j)))
+    diff_loops_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/diff_loops/", as.character(j))
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/IGV/", as.character(j)))
-    IGV_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/IGV/", as.character(j), "/")
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/IGV/", as.character(j)))
+    IGV_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/IGV/", as.character(j), "/")
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/gsea/", as.character(j)))
-    gsea_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/gsea/", as.character(j), "/")
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/gsea/", as.character(j)))
+    gsea_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/gsea/", as.character(j), "/")
     
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/genomeTracks/", as.character(j)))
-    track_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/genomeTracks/", as.character(j), "/")
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/genomeTracks/", as.character(j)))
+    track_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/genomeTracks/", as.character(j), "/")
     
     #TADs
     paths = table %>% dplyr::select(c("sample_ID", paste0("iced_h5_", as.character(j))))
     colnames(paths) = c("sample_ID", "iced_h5")
     for(i in 1:length(rownames(table))){
-      prefix_i = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/TADs/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j))
+      prefix_i = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/TADs/", as.character(j), "/", paths$sample_ID[i], "_", as.character(j))
       system2("hicFindTADs", paste0("--matrix ", paths$iced_h5[i], " --correctForMultipleTesting fdr --outPrefix ", prefix_i))
     }
     
@@ -673,7 +688,7 @@ if(untargeted_analysis == TRUE){
     colnames(paths) = c("sample_ID", "iced_mcool")
     
     for(c in 1:length(rownames(chrom_sizes))){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/autocorrelation/", as.character(j), "/", chrom_sizes$chr[c]))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/autocorrelation/", as.character(j), "/", chrom_sizes$chr[c]))
     }
     for(i in 1:length(rownames(paths))){
       hic = HiCExperiment::import(paths$iced_mcool[i], format = "mcool", resolution = j)
@@ -736,7 +751,7 @@ if(untargeted_analysis == TRUE){
     colnames(paths) = c("sample_ID", "condition", "batch", "iced_mcool")
     
     for(c in 1:length(rownames(chrom_sizes))){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/ratio/", as.character(j), "/", chrom_sizes$chr[c]))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/ratio/", as.character(j), "/", chrom_sizes$chr[c]))
     }
     
     for(k in references){
@@ -1006,11 +1021,11 @@ if(untargeted_analysis == TRUE){
             echo = TRUE)
           
           #move into selected_path
-          system2("mv", paste0("DifferentialResult/", diffdir, " /home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i))
+          system2("mv", paste0("DifferentialResult/", diffdir, " /home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i))
           system2("rm", "-r DifferentialResult")
           
           #move to IGV folder
-          viz_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/viz/vizIGV_intra/data/")
+          viz_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/viz/vizIGV_intra/data/")
           
           if("bias" %in% colnames(table) | paste0("bias_", as.character(j)) %in% colnames(table)){
             if(file.exists(paste0(IGV_path, "diff_loops_", as.character(j), "_", k, "_vs_", i, ".bedpe")) == FALSE){
@@ -1021,7 +1036,7 @@ if(untargeted_analysis == TRUE){
             colnames(diff_loops) = c("chr1", "start1", "end1", "chr2", "start2", "end2", "pval")
             diff_loops = diff_loops %>% dplyr::mutate(loop = paste0(chr1, "_", start1, "_", chr2, "_", start2))
             
-            FithicResult = read.delim(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/fithic_run/FithicResult.txt"))
+            FithicResult = read.delim(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/fithic_run/FithicResult.txt"))
             FithicResult$loop = rownames(FithicResult)
             diff_loops = diff_loops %>% dplyr::left_join(FithicResult, by = "loop")
             
@@ -1078,13 +1093,13 @@ if(untargeted_analysis == TRUE){
             write.table(subcomp, file = paste0(IGV_path, "subcompartments_", k, "_", as.character(j), ".bedGraph"), sep = "\t", row.names = FALSE, quote = FALSE, col.names = FALSE)
           }
           if(file.exists(paste0(IGV_path, "diff_subcompartments_", k, "_vs_", i, "_", as.character(j), ".bedGraph")) == FALSE){
-            subcomp = read.delim(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/fdr_result/intra_sample_group.subcompartments.bedGraph"))
+            subcomp = read.delim(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/fdr_result/intra_sample_group.subcompartments.bedGraph"))
             subcomp = subcomp %>% dplyr::select(c("chr", "start", "end", "padj")) %>% dplyr::mutate(padj = -log10(padj))
             write.table(subcomp, file = paste0(IGV_path, "diff_subcompartments_log10adjPval_", as.character(j), "_", k, "_vs_", i, ".bedGraph"), sep = "\t", row.names = FALSE, quote = FALSE, col.names = FALSE)
           }
           
           samples = (table %>% dplyr::filter(condition %in% c(i, k)))$sample_ID
-          viz_path = paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/viz/files/")
+          viz_path = paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/dcHiC/", as.character(j), "/differential_results_", k, "_vs_", i, "/viz/files/")
           
           for(m in samples){
             if(file.exists(paste0(IGV_path, "compartments_", m, "_", as.character(j), ".bedGraph")) == FALSE){
@@ -1158,7 +1173,7 @@ if(untargeted_analysis == TRUE){
     
     #PCA
     if(nrow(table) > 2){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/comp_correlation"))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/comp_correlation"))
       PCs = c()
       for(i in 1:length(rownames(table))){
         PC_i = paste0(IGV_path,  "compartments_", table$sample_ID[i], "_", as.character(j), ".bedGraph")
@@ -1184,12 +1199,12 @@ if(untargeted_analysis == TRUE){
       PC_matrix_t = t(PC_matrix)
       data.pca <- prcomp(PC_matrix_t, scale = TRUE)
       fviz_pca_ind(data.pca)
-      ggsave(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/comp_correlation/PCA_", as.character(j), ".pdf"), width = 12, height = 8)
+      ggsave(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/comp_correlation/PCA_", as.character(j), ".pdf"), width = 12, height = 8)
       
       corr = rcorr(as.matrix(PC_matrix))
       pearson = as.data.frame(corr[["r"]])
       as.ggplot(pheatmap(pearson))
-      ggsave(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/comp_correlation/Pearson_", as.character(j), ".pdf"), width = 12, height = 8)
+      ggsave(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/comp_correlation/Pearson_", as.character(j), ".pdf"), width = 12, height = 8)
     }
     
     #genomeTrack
@@ -1197,7 +1212,7 @@ if(untargeted_analysis == TRUE){
     colnames(paths) = c("sample_ID", "iced_h5")
     
     for(c in 1:length(rownames(chrom_sizes))){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/untargeted_analysis/genomeTracks/", as.character(j), "/", chrom_sizes$chr[c]))
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/untargeted_analysis/genomeTracks/", as.character(j), "/", chrom_sizes$chr[c]))
     }
     
     for(i in 1:length(rownames(paths))){
@@ -1257,22 +1272,22 @@ if(untargeted_analysis == TRUE){
 
 #ANALYSIS - targeted
 if(targeted_analysis == TRUE){
-  dir.create(paste0("/home/shared_folder/output_", current_time, "/targeted_analysis"))
+  dir.create(paste0("/home/shared_folder/ooutput_HiC/targeted_analysis"))
   
   #virtual 4C
   if(virtual4C == TRUE){
-    dir.create(paste0("/home/shared_folder/output_", current_time, "/targeted_analysis/virtual_4C"))
+    dir.create(paste0("/home/shared_folder/ooutput_HiC/targeted_analysis/virtual_4C"))
     
     for(v in 1:length(rownames(vp))){
       v_bed = data.frame(chr = vp$chr[v], start = vp$start[v], end = vp$end[v])
       viewpoint = paste0(vp$chr[v], ":", vp$start[v], ":", vp$end[v])
       viewpoint_f = paste0(vp$chr[v], "_", vp$start[v], "_", vp$end[v])
-      write.table(v_bed, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE, file = paste0("/home/shared_folder/output_", current_time, "/targeted_analysis/virtual_4C/", viewpoint_f, ".bed"))
+      write.table(v_bed, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE, file = paste0("/home/shared_folder/ooutput_HiC/targeted_analysis/virtual_4C/", viewpoint_f, ".bed"))
     }
     print(colnames(table))
     for(j in res_v4C){
-      dir.create(paste0("/home/shared_folder/output_", current_time, "/targeted_analysis/virtual_4C/", as.character(j)))
-      vir4C_path = paste0("/home/shared_folder/output_", current_time, "/targeted_analysis/virtual_4C/", as.character(j), "/")
+      dir.create(paste0("/home/shared_folder/ooutput_HiC/targeted_analysis/virtual_4C/", as.character(j)))
+      vir4C_path = paste0("/home/shared_folder/ooutput_HiC/targeted_analysis/virtual_4C/", as.character(j), "/")
       
       paths = table %>% dplyr::select("sample_ID", paste0("iced_mcool_", as.character(j)))
       colnames(paths) = c("sample_ID", "iced_mcool")
@@ -1289,7 +1304,7 @@ if(targeted_analysis == TRUE){
                       sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE, file = paste0(vir4C_path, paths$sample_ID[i], "_", viewpoint_f, ".bedGraph"))
           system2("cp", paste0("/4C_track ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
           system2("sed", paste0("-i 's|file = file_4C|file = ", vir4C_path, paths$sample_ID[i], "_", viewpoint_f, ".bedGraph|g' ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
-          system2("sed", paste0("-i 's|file = file_viewpoint|file = /home/shared_folder/output_", current_time, "/targeted_analysis/virtual_4C/", viewpoint_f, ".bed|g' ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
+          system2("sed", paste0("-i 's|file = file_viewpoint|file = /home/shared_folder/ooutput_HiC/targeted_analysis/virtual_4C/", viewpoint_f, ".bed|g' ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
           
           system2("sed", paste0("-i 's|title = title_4C_auto|title = virtual 4C ", paths$sample_ID[i], "|g' ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
           system2("sed", paste0("-i 's|title = title_4C_zoom|title = virtual 4C ", paths$sample_ID[i], " zoom|g' ", vir4C_path, "track_", paths$sample_ID[i], "_", viewpoint_f))
