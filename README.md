@@ -177,4 +177,4 @@ Processed data anlysis consits of different steps requiring different docker ima
    
 For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to Refer to our GitHubs:
 - bulk RNAseq pipeline (https://github.com/sara-bianchi/Bulk_RNA_seq_pipeline)
-- Hi-c pipeline (https://github.com/sara-bianchi/HiC_pipeline)
+- Hi-C pipeline (https://github.com/sara-bianchi/HiC_pipeline)
