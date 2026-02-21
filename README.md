@@ -64,7 +64,7 @@ RNA ChIP data anlysis consits of different steps requiring different docker imag
        docker exec -it RNA_ChIP_CIRIquant /bin/bash
        /home/shared_folder/CIRIquant.sh
    
-9) O-MAP probes alignment and generation of .bed tracks for differentially enriched TTN introns and circRNAs or WT and ΔRBM20
+9) Bowtie index generation, O-MAP probes alignment, and generation of .bed tracks for differentially enriched TTN introns and circRNAs or WT and ΔRBM20
 
        docker pull hedgelab/crispr:image1
        docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_tracks hedgelab/crispr:image1
@@ -74,7 +74,7 @@ RNA ChIP data anlysis consits of different steps requiring different docker imag
 
 #### DNA ChIP data processing
 DNA ChIP data processing consists in the download of .bw track files from GEO and conversion to the .bedGraph format for circular plots generation and in the binning of chromosome 2 tracks at 100kb to enable comparison with other genomic tracks with Pearson correlation analysis.
-The analysis can be run on our docker hedgelab/? and it canbe performed by running the following steps in the terminal from the DNA_ChIP_data_processing folder
+The analysis can be run on our docker hedgelab/? and it canbe performed by running the following steps in the terminal from the DNA_ChIP_data_processing folder:
 
      docker pull hedgelab/?
      docker run -d -v ../DNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=DNA_ChIP hedgelab/?
@@ -82,7 +82,7 @@ The analysis can be run on our docker hedgelab/? and it canbe performed by runni
      /home/shared_folder/chromatin_O-MAP_analysis.sh
 
 
-## bulk data processing
+## Bulk data processing
 For this step it is required to use the scripts in the folder bulk_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/bulk_data_processing.gz/content.
 Place the files and the scripts in the same folder, make the scripts executable, and download the fastq files for the RUES2 CMs, WTC11 CMs and RUES2 KD CMs in a subfolder bulk_data_processing/fastq
 
@@ -115,8 +115,15 @@ Bulk data anlysis consits of different steps requiring different docker images (
 
 
 ## HiC data processing
+For this step it is required to use the scripts in the folder HiC_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/HiC_data_processing.gz/content.
+Place the files and the scripts in the same folder, make the scripts executable, and download the fastq files for the RUES2 CMs (developmental tracks and WT-ΔRBM20 day 30 CMs) in a subfolder HiC_data_processing/fastq
 
-## processed data analysis
+The analysis can be run on our docker hedgelab/hic_pipleine:image15 and it canbe performed by running the following steps in the terminal from the HiC_data_processing folder with the following steps:
+1) HiC data processing consists in the Bowtie2 genome index generation, reads alignment with HiC-Pro, replicates similarity analysis with HiCRep, differential compartments and loops analysis with dcHiC and FitHiC, virtual 4C analysis from the TTN promoter with Bioconductor (HiContacts), TADs detection (HiCExplorer), and IGV tracks generation
+2) Trasn-C analysis from the TTN seed and random background generation
+
+
+## Processed data analysis
 
 For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to Refer to our GitHubs:
 - bulk RNAseq pipeline (https://github.com/sara-bianchi/Bulk_RNA_seq_pipeline)
