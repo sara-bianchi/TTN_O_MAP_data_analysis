@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#ChIP .bw tracks download
 mkdir /home/shared_folder/ChIP_track
 wget -P /home/shared_folder/ChIP_track https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE234808&format=file&file=GSE234808%5FKO%5FMock%5FRep1%5FL2FC%2Ebw
 wget -P /home/shared_folder/ChIP_track https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE234808&format=file&file=GSE234808%5FKO%5FMock%5FRep2%5FL2FC%2Ebw

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#sudo docker run -d -v $PWD:/home/shared_folder --name sashimi hedgelab/sashimiplot:image1
-
 mkdir home/shared_folder/sashimi_pulldown/WT_vs_RBM20KO
 rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_pulldown/samples_WT.txt --b2 /home/shared_folder/rmats_pulldown/samples_RBM20KO.txt -e /home/shared_folder/rmats_pulldown/A3SS.MATS_CACNB3.JC.txt --event-type A3SS -o /home/shared_folder/sashimi_pulldown/WT_vs_RBM20KO/A3SS --group-info /home/shared_folder/rmats_pulldown/WT_vs_RBM20KO.gf
 rmats2sashimiplot --l1 WT --l2 RBM20KO --b1 /home/shared_folder/rmats_pulldown/samples_WT.txt --b2 /home/shared_folder/rmats_pulldown/samples_RBM20KO.txt -e /home/shared_folder/rmats_pulldown/A5SS.MATS_TPRM7.JC.txt --event-type A5SS -o /home/shared_folder/sashimi_pulldown/WT_vs_RBM20KO/A5SS --group-info /home/shared_folder/rmats_pulldown/WT_vs_RBM20KO.gf
