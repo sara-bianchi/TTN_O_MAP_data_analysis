@@ -27,8 +27,8 @@ RNA ChIP data processing consits of different steps requiring different docker i
    
 2) Conversion of BAM files to .bed tracks on the TTN genes, normalization on the coverage and generation of .bedGraph tracks with the log2FC pulldown/input
 
-       docker pull hedgelab/?
-       docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_introns hedgelab/?
+       docker pull hedgelab/o_map_data_analysis:image1
+       docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_introns hedgelab/o_map_data_analysis:image1
        docker exec -it RNA_ChIP_introns /bin/bash
        /home/shared_folder/bamToBed_input.sh
        /home/shared_folder/bamToBed_pulldown.sh
@@ -76,8 +76,8 @@ RNA ChIP data processing consits of different steps requiring different docker i
 DNA ChIP data processing consists in the download of .bw track files from GEO and conversion to the .bedGraph format for circular plots generation and in the binning of chromosome 2 tracks at 100kb to enable comparison with other genomic tracks with Pearson correlation analysis.
 The analysis can be run on our docker hedgelab/? and it canbe performed by running the following steps in the terminal from the DNA_ChIP_data_processing folder:
 
-     docker pull hedgelab/?
-     docker run -d -v ../DNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=DNA_ChIP hedgelab/?
+     docker pull hedgelab/o_map_data_analysis:image1
+     docker run -d -v ../DNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=DNA_ChIP hedgelab/o_map_data_analysis:image1
      docker exec -it DNA_ChIP /bin/bash
      /home/shared_folder/chromatin_O-MAP_analysis.sh
 
@@ -96,8 +96,8 @@ Bulk data processig consits of different steps requiring different docker images
    
 2) For RUES2 CMs onversion of BAM files to .bed tracks on the TTN and RBM20 genes
 
-       docker pull hedgelab/?
-       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=RUES2_tracks hedgelab/?
+       docker pull hedgelab/o_map_data_analysis:image1
+       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=RUES2_tracks hedgelab/o_map_data_analysis:image1
        docker exec -it RUES2_tracks /bin/bash
        /home/shared_folder/bamToBed_tracks.sh
    
@@ -139,8 +139,8 @@ Place the files and the scripts in the same folder and make the scripts executab
 Processed data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the bulk_data_processing folder as following:
 1) pyGenomeTracks generation for visualization of compartments, virtual 4C tracks, O-MAP pulldown CIDs and TIDs, diferentially enriched introns and circRNAs, reads distribution on TTN and RBM20 in RUES2 CMs bulk data:
 
-       docker pull hedgelab/?
-       docker run -d -v ../processed_data_analysis:/home/shared_folder --privileged=true --name=processed_data_analysis hedgelab/?
+       docker pull hedgelab/o_map_data_analysis:image1
+       docker run -d -v ../processed_data_analysis:/home/shared_folder --privileged=true --name=processed_data_analysis hedgelab/o_map_data_analysis:image1
        docker exec -it processed_data_analysis /bin/bash
        /home/shared_folder/genome_tracks_generation.sh
 
