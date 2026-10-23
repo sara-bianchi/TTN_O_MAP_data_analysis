@@ -1,4 +1,6 @@
 # TTN_O_MAP_data_analysis
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
 scripts for reproducibility of the bioinforatic analysis of "Nascent transcript O-MAP reveals the molecular architecture of an RBM20-regulated single-locus subnuclear compartment organized around the TTN RNA", Kania, Bianchi et al.
 
 Our analyses include:
