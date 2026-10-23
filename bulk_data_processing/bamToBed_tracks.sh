@@ -2,40 +2,40 @@
 
 #convert bam files to wig
 #RBM20
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_E8/WT_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.1/WT_mTeSR1.1Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.3/WT_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.4/WT_mTeSR1.4Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.5/WT_mTeSR1.5Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_E8/RBM20.KO_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.1/RBM20.KO_mTeSR1.1Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.3/RBM20.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_E8/TTN.PROM.KO_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.3/TTN.PROM.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.4/TTN.PROM.KO_mTeSR1.4Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.5/TTN.PROM.KO_mTeSR1.5Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.6/TTN.PROM.KO_mTeSR1.6Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO100_E8/TTN.KO100_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO100_mTeSR1.3/TTN.KO100_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO115_mTeSR1.3/TTN.KO115_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_E8/WT_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.1/WT_mTeSR1.1Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.3/WT_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.4/WT_mTeSR1.4Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.5/WT_mTeSR1.5Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_E8/RBM20.KO_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.1/RBM20.KO_mTeSR1.1Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.3/RBM20.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_E8/TTN.PROM.KO_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.3/TTN.PROM.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.4/TTN.PROM.KO_mTeSR1.4Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.5/TTN.PROM.KO_mTeSR1.5Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.6/TTN.PROM.KO_mTeSR1.6Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO100_E8/TTN.KO100_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO100_mTeSR1.3/TTN.KO100_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 10:110643948-110839471 /home/shared_folder/output_RUES2/counts/TTN.KO115_mTeSR1.3/TTN.KO115_mTeSR1.3Aligned.sortedByCoord.out.bam
 
 #TTN
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_E8/WT_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.1/WT_mTeSR1.1Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.3/WT_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.4/WT_mTeSR1.4Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.5/WT_mTeSR1.5Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_E8/RBM20.KO_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.1/RBM20.KO_mTeSR1.1Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.3/RBM20.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_E8/TTN.PROM.KO_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.3/TTN.PROM.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.4/TTN.PROM.KO_mTeSR1.4Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.5/TTN.PROM.KO_mTeSR1.5Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.6/TTN.PROM.KO_mTeSR1.6Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO100_E8/TTN.KO100_E8Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO100_mTeSR1.3/TTN.KO100_mTeSR1.3Aligned.sortedByCoord.out.bam
-./bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO115_mTeSR1.3/TTN.KO115_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_E8/WT_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.1/WT_mTeSR1.1Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.3/WT_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.4/WT_mTeSR1.4Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/WT_mTeSR1.5/WT_mTeSR1.5Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_E8/RBM20.KO_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.1/RBM20.KO_mTeSR1.1Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/RBM20.KO_mTeSR1.3/RBM20.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_E8/TTN.PROM.KO_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.3/TTN.PROM.KO_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.4/TTN.PROM.KO_mTeSR1.4Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.5/TTN.PROM.KO_mTeSR1.5Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.PROM.KO_mTeSR1.6/TTN.PROM.KO_mTeSR1.6Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO100_E8/TTN.KO100_E8Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO100_mTeSR1.3/TTN.KO100_mTeSR1.3Aligned.sortedByCoord.out.bam
+/bam2wig/bam2wig -c 2:178525989-178830802 /home/shared_folder/output_RUES2/counts/TTN.KO115_mTeSR1.3/TTN.KO115_mTeSR1.3Aligned.sortedByCoord.out.bam
 
 #convert wig to bed
 mkdir /home/shared_folder/bed_RUES2
