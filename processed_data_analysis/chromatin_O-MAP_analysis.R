@@ -20,7 +20,7 @@ theme_set(theme_bw(12) +
 
 
 ##ChIP O-MAP plots - figure 2
-#virtual 4C normalization - panel b
+#virtual 4C normalization
 WT_chr2_178806793_178808363 <- read.delim("/home/shared_folder/chromatin_data/virtual4C_data/WT_chr2_178806793_178808363_1M.bedGraph", header=FALSE)
 sum = sum(WT_chr2_178806793_178808363$V4)
 WT_chr2_178806793_178808363 = WT_chr2_178806793_178808363 %>% dplyr::mutate(V4 = V4/sum*nrow(WT_chr2_178806793_178808363))
@@ -33,7 +33,7 @@ KO_chr2_178806793_178808363 = KO_chr2_178806793_178808363 %>% dplyr::mutate(V4 =
 KO_chr2_178806793_178808363 = KO_chr2_178806793_178808363 %>% dplyr::mutate(c4 = ".", c5 = V4, c6 = ".", c7 = V2, c8 = V3, comp = ifelse(V4 > 0, "255,0,0", "0,0,255")) %>% dplyr::select(-V4)
 write.table(KO_chr2_178806793_178808363, "/home/shared_folder/chromatin_data/virtual4C_data/RBM20KO_virtual4C.bed", quote = FALSE, col.names = FALSE, row.names = FALSE, sep = "\t")
 
-#circular plots - panel d
+#circular plots
 GSE234808_WT_Interacting_Domains <- read.delim("/home/shared_folder/pulldown_data/chromatin_data/GSE234808_WT_Interacting_Domains.bed", header=FALSE) %>% dplyr::select(-V4)
 GSE234808_KO_Interacting_Domains <- read.delim("/home/shared_folder/pulldown_data/chromatin_data/GSE234808_KO_Interacting_Domains.bed", header=FALSE) %>% dplyr::select(-V4)
 
@@ -181,8 +181,7 @@ circos.genomicDensity(list(WT_OMAP_filtered, KO_OMAP_filtered), col = c("white",
 dev.off()
 
 
-##TIDs FISH analysis - supplementary figure 2
-#panel b
+##TIDs FISH analysis
 Conglomerate_DNA_Hits_TTN_Distances <- read.csv("/home/shared_folder/chromatin_data/FISH_data/Conglomerate_DNA_Hits_TTN_Distances.csv", sep=";")
 cis_interactions = Conglomerate_DNA_Hits_TTN_Distances %>% dplyr::filter(cis_trans == "cis")
 cis_interactions = cis_interactions %>% dplyr::mutate(interactor = ifelse(interactor == "ctr", "ctr_chr2", interactor)) %>%
@@ -214,8 +213,7 @@ ggplot(trans_interactions) + stat_ecdf(aes(x = distance, color = interactor), li
 ggsave("/home/shared_folder/panelG/cumulative_TIDs_FISH_separate.pdf", width = 12, height = 7)
 
 
-##correlation matrices - supplementary figure 1
-#panel a - compartments correlation
+##correlation matrices
 compartments_undiff_N1_150000 <- read.delim("/home/shared_folder/chromatin_data/compartments_data/compartments_undiff_N1_150000.bedGraph", header=FALSE)
 colnames(compartments_undiff_N1_150000) = c("chr", "start", "end", "WT_ESCday00_N1")
 compartments_undiff_N2_150000 <- read.delim("/home/shared_folder/chromatin_data/compartments_data/compartments_undiff_N2_150000.bedGraph", header=FALSE)
@@ -272,7 +270,7 @@ annotation_col = annotation_col %>% dplyr::select(-name)
 as.ggplot(pheatmap(pearson, annotation_row = annotation_col, display_numbers = TRUE, color = viridis::viridis(n = 25, option = "H"), number_color = "black"))
 ggsave("/home/shared_folder/output_plots/compartments_pearson.pdf")
 
-#panel b - SCC
+#SCC
 sample_IDs = colnames(pearson)
 tab = data.frame(rn = sample_IDs)
 cnames = colnames(tab)
@@ -311,7 +309,7 @@ tab = tab %>% dplyr::select(-rn)
 as.ggplot(pheatmap(tab, annotation_row = annotation_col, display_numbers = TRUE, color = viridis::viridis(n = 25, option = "H"), number_color = "black"))
 ggsave("/home/shared_folder/output_plots/HiCrep_pearson.pdf")
 
-#panel c/d - WT/KO chr2 correlations
+#WT/KO chr2 correlations
 WT_OMAP_R1 <- read.delim("/home/shared_folder/pulldown_data/chromatin_data/WT_OMAP_R1_binned100000.bed", header=FALSE)
 chr = c()
 start = c()
@@ -501,7 +499,7 @@ ggsave("/home/shared_folder/output_plots/pearson_RBM20KO.pdf")
 
 
 ##transC
-#circular plots - figure 2 panel e
+#circular plots
 bin_scores_WT_TTN <- read.csv("/home/shared_folder/chromatin_data/transC_data/bin_scores_WT_TTN.csv") %>% dplyr::mutate(n = 1:2887)
 bin_scores_RBM20KO_TTN <- read.csv("/home/shared_folder/chromatin_data/transC_data/bin_scores_RBM20KO_TTN.csv") %>% dplyr::mutate(n = 1:2887)
 bin_map_1000000 <- read.delim("/home/shared_folder/chromatin_data/transC_data/bin_map_1000000.bed", header=FALSE)
@@ -581,7 +579,7 @@ circos.genomicLink(region1, region2, lwd = 0.1, col =  col)
 draw(Legend(col_fun = col_fun, title = "Trans-C ranking", direction = "horizontal"), x = unit(0.1, "npc"), y = unit(0.1, "npc"))
 dev.off()
 
-#AUC - supplementary 3 panel a
+#AUC
 bin_scores_WT = bin_scores_WT_TTN %>% dplyr::filter(! X0 %in% c("427")) %>%
   dplyr::mutate(TIDs = ifelse(X0 %in% TIDs, "TIDs", "")) %>% dplyr::mutate(clique = ifelse(X0 %in% clique, "clique", ""))
 bin_scores_WT = bin_scores_WT %>% dplyr::mutate(n = rev(1:length(rownames(bin_scores_WT))))
