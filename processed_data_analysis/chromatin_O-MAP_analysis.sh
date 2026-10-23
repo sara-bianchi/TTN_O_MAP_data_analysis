@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#docker creation
-sudo docker run -d -v $PWD:/home/shared_folder --name O_MAP_ChIP -p 8282:8787 hedgelab/hic_pipeline:image15
-sudo docker exec -it O_MAP_ChIP /bin/bash
-	rstudio-server start
-on browser for R data analysis: localhost:8282
-
 #create output folder
 mkdir /home/shared_folder/output_plots
 
