@@ -22,7 +22,7 @@ theme_set(theme_bw(12) +
                   plot.title = element_text(size = 15, face="bold", margin = margin(10,0,10,0)),
                   axis.text.x = element_text(angle = 90, hjust = 1)))
 
-##proteomics data GSEA - figure 6 panel C
+##proteomics data GSEA
 proteomics_pulldown <- read_excel("/home/shared_folder/pulldown_data/proteomics_data/proteomics_pulldown.xlsx", skip = 2)[,1:19]
 proteomics_pulldown$Log2FC_KO_WT = as.numeric(proteomics_pulldown$Log2FC_KO_WT)
 proteomics_pulldown$T_significance[is.na(proteomics_pulldown$T_significance)] = ""
@@ -51,7 +51,7 @@ for(i in BP_terms_WT){
   core_genes = strsplit(core_genes, "/")[[1]]
 }
 
-#core genes in pulldown - figure 6 panel D
+#core genes in pulldown
 res_i = res_gsea_BP %>% dplyr::filter(Description == i)
 core_genes = res_i$core_enrichment
 core_genes = strsplit(core_genes, "/")[[1]]
@@ -61,7 +61,7 @@ ggplot(proteomics_pulldown %>% dplyr::filter(Gene %in% core_genes) %>% dplyr::mu
   ggrepel::geom_text_repel(aes(label = sign), max.overlaps = 5,	size = 3, hjust = 2) + xlab("log2 fold change WT/RBM20KO") 
 ggsave("/home/shared_folder/output_plots/volcano_plot_SAFB.pdf")
 
-#IF data SAFB - figure 7 panel A
+#IF data SAFB
 SAFB_meta <- read_excel("/home/shared_folder/imaging_data/SAFB_meta.xlsx")
 
 SAFB_WT <- melt(read_excel("/home/shared_folder/imaging_data/SAFB_WT.xlsx") %>% dplyr::select(-Surfaces))
@@ -120,7 +120,7 @@ ggplot(n_foci_SAFB, aes(x = condition, y = n_foci)) + geom_violin() + geom_boxpl
   stat_pvalue_manual(data = pval_df, size = 3, coord.flip = TRUE) + xlab("") + ylab("number of foci per cell") + coord_flip()
 ggsave("/home/shared_folder/output_plots/SAFB_nfoci_boxplot.pdf")
 
-#IF data QKI - figure 7 panel B
+#IF data QKI
 QKI_meta <- read_excel("/home/shared_folder/imaging_data/QKI_meta.xlsx")
 
 QKI_WT <- melt(read_excel("/home/shared_folder/imaging_data/QKI_WT.xlsx") %>% dplyr::select(-Surfaces))
@@ -219,7 +219,7 @@ factory_genes_RUES2 = factory_genes_RUES2 %>% dplyr::mutate(ELAVL1_KD = ifelse(g
   dplyr::mutate(QKI_KD = ifelse(gene_ID %in% (QKI_dge %>% dplyr::filter(col_to_plot == "down_SCR"))$gene_ID, "down_QKI_KD", ifelse(gene_ID %in% (QKI_dge %>% dplyr::filter(col_to_plot == "up_QKI_KD"))$gene_ID, "up_QKI_KD", ""))) %>%
   dplyr::mutate(SAFB_KD = ifelse(gene_ID %in% (SAFB_dge %>% dplyr::filter(col_to_plot == "down_SCR"))$gene_ID, "down_SAFB_KD", ifelse(gene_ID %in% (SAFB_dge %>% dplyr::filter(col_to_plot == "up_SAFB_KD"))$gene_ID, "up_SAFB_KD", "")))
 
-#factory KD anticorrelation - figure 7 panel C
+#factory KD anticorrelation
 ggplot() +
   geom_point(aes(x = factory_genes_RUES2$logFC_RBM20KO, y = factory_genes_RUES2$logFC_TTNpromKO), size = 2, color = "grey", alpha = 0.5) +
   stat_density_2d(aes(x = (factory_genes_RUES2 %>% dplyr::filter(ELAVL1_KD == "down_ELAVL1_KD"))$logFC_RBM20KO, y = (factory_genes_RUES2 %>% dplyr::filter(ELAVL1_KD == "down_ELAVL1_KD"))$logFC_TTNpromKO), color = "#6db6ff") +
@@ -244,7 +244,7 @@ ggplot() +
   scale_x_continuous(limits = c(-5, 5)) + scale_y_continuous(limits = c(-5, 5)) + xlab("RBM20KO vs WT logFC") + ylab("TTNpromKO vs WT logFC")
 ggsave("/home/shared_folder/output_plots/SAFB_dge_factory_density.pdf")
 
-#TIDs GSEA - figure 7 panel D
+#TIDs GSEA
 act_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/act_genes.csv", row.names=1)
 rep_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/DGE_RUES2_data/rep_genes.csv", row.names=1)
 biv_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/DGE_RUES2_data/biv_genes.csv", row.names=1)
