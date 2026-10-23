@@ -22,7 +22,7 @@ theme_set(theme_bw(12) +
                   plot.title = element_text(size = 15, face="bold", margin = margin(10,0,10,0))))
 
 ##TIDs/CIDs compartments analysis
-#TIDs compartment changes - figure 3 panel c
+#TIDs compartment changes
 TIDs = read.delim("/home/shared_folder/chromatin_data/ChromHMM_data/WT_Interacting_Domains.bed", header=FALSE)
 colnames(TIDs) = c("chr", "start", "end", "id")
 trans_TIDs = TIDs %>% dplyr::filter(chr != "chr2")
@@ -58,7 +58,7 @@ ggplot(PC_combined %>% dplyr::arrange(TIDs)) + geom_point(aes(x = WT, y = RBM20K
   theme(plot.title = element_text(size = 15, face = "plain", margin = margin(10,0,10,0)))
 ggsave("/home/shared_folder/output_plots/compartment_changes_all_TIDs.pdf")
 
-#CIDs compartment changes - supplementary figure 4 panel d
+#CIDs compartment changes
 CIDs = TIDs %>% dplyr::filter(chr == "chr2")
 PC_combined_cis = PC_WT %>% dplyr::left_join(PC_RBM20KO, by = c("chr", "start", "end")) %>%
   dplyr::filter(chr == "chr2")
@@ -186,7 +186,7 @@ TIDs_genes = rbind(TIDs_genes, data.frame(state = "biv", dens = length(rownames(
 write.csv(biv_tids_genes %>% dplyr::select(geneID), "/home/shared_folder/chromatin_data/ChromHMM_data/biv_genes.csv")
 write.csv(TIDs_genes, "/home/shared_folder/chromatin_data/ChromHMM_data/gene_denstiy.csv")
 
-#TIDs scatterplots - figure 2 panel E (right)
+#TIDs scatterplots
 PC_combined = PC_combined %>% dplyr::filter(! chr %in% c("chrX", "chr21", "chr22")) 
 
 tids_PC_comb_a = tids_PC_comb %>% dplyr::mutate(bin = paste0(chr, "_", start)) %>%
@@ -231,14 +231,14 @@ ggplot(PC_combined %>% dplyr::arrange(bivalent)) + geom_point(aes(x = WT, y = RB
   theme(plot.title = element_text(size = 15, face = "plain", margin = margin(10,0,10,0)))
 ggsave("/home/shared_folder/output_plots/compartment_changes_bivalent_TIDs.pdf")
 
-#TIDs statistics - figure 2 panel E (left)
+#TIDs statistics
 TIDs_genes = TIDs_genes %>% dplyr::select(-dens)
 TIDs_genes = melt(TIDs_genes)
 ggplot(TIDs_genes) + geom_bar(aes(x = variable, y = value, fill = state), stat = "identity", position = "fill") +
   scale_fill_manual(values = c("#FEAF16", "#1CBE4F", "#56B4E9")) + xlab("") + ylab("relative proportion")
 ggsave("/home/shared_folder/output_plots/stats_TIDs_ChromHMM.pdf")
 
-#gene length distribution - supplementary figure 4 panel E
+#gene length distribution
 tids_genes = rbind(act_tids_genes %>% dplyr::mutate(state = "active"), rep_tids_genes %>%
                      dplyr::mutate(state = "repressive"), biv_tids_genes %>%
                      dplyr::mutate(state = "bivalent"))
@@ -247,7 +247,7 @@ ggplot(tids_genes) + stat_ecdf(aes(x = log2(width), color = state), size = 1) +
   ylab("cumulative frequency") + xlab("log2(gene length)")
 ggsave("/home/shared_folder/output_plots/gene_length_distribution.pdf")
 
-#gene expression of chromatin states - supplementary figure 4 panel E
+#gene expression of chromatin states
 TPMnormalized_counts_modules <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/TPMnormalized_counts_modules.csv") %>% dplyr::select(-X)
 TPMcounts = melt(TPMnormalized_counts_modules)
 table <- read_excel("/home/shared_folder/chromatin_data/DGE_RUES2_data/table.xlsx")
@@ -436,7 +436,7 @@ n_biv = rbind(n1_biv, n2_biv)
 numbers = cbind(n_act, n_rep, n_biv)
 numbers = numbers[c(2, 1, 4, 3),]
 
-#heatmap enrichment - supplementary figure 5 panel a
+#heatmap enrichment
 as.ggplot(pheatmap(enrichment, annotation_col = annotation_col,
                    cluster_rows = FALSE, cluster_cols = FALSE, display_numbers = numbers,
                    labels_col = rep(c("RBM20KO_downregulated", "RBM20KO_upregulated"), times = 3),
@@ -445,7 +445,7 @@ as.ggplot(pheatmap(enrichment, annotation_col = annotation_col,
                    color = viridis::viridis(n = 25, option = "H"), number_color = "white"))
 ggsave("/home/shared_folder/output_plots/enrichment_table_RUES2.pdf")
 
-#density of double upregulated genes pTTNKO - figure 4 panel F
+#density of double upregulated genes pTTNKO
 factory_genes_RUES2 = factory_genes_RUES2 %>% dplyr::mutate(name = ifelse(gene_ID %in% biv_tids_genes$geneID, gene_name, "")) %>%
   dplyr::mutate(biv = ifelse(name != "", "biv", "")) %>% dplyr::arrange(biv)
 ggplot(factory_genes_RUES2 %>% dplyr::filter(biv == "biv"), aes(x = logFC_RBM20KO, y = logFC_TTNpromKO)) + stat_density_2d(aes(color = biv), size = 1, color = "#1CBE4F") + geom_point(size = 1) +
@@ -456,7 +456,7 @@ ggplot(factory_genes_RUES2 %>% dplyr::filter(biv == "biv"), aes(x = logFC_RBM20K
   theme(plot.title = element_text(size = 15, face = "plain", margin = margin(10,0,10,0)))
 ggsave("/home/shared_folder/output_plots/biv_density_genes_pTTNKO_RUES2.pdf")
 
-#density of double upregulated genes pTTNKO - supplementary figure 5 panel B
+#density of double upregulated genes pTTNKO
 ggplot(factory_genes_RUES2 %>% dplyr::filter(biv == "biv"), aes(x = logFC_RBM20KO, y = logFC_TTNKO)) + stat_density_2d(aes(color = biv), size = 1, color = "#1CBE4F") + geom_point(size = 1) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") + geom_hline(aes(yintercept = 0), linetype = "dashed") +
   ggrepel::geom_text_repel(aes(label = name), max.overlaps = 10,	size = 2, hjust = 1.2) +
