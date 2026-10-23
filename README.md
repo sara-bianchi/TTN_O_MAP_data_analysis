@@ -1,5 +1,5 @@
 # TTN_O_MAP_data_analysis
-![Docker Image Version](https://img.shields.io/docker/v/hedgelab:bulk_image?style=flat-square&logo=docker&logoColor=white&color=2496ED)
+![Docker Image Version](https://img.shields.io/docker/v/hedgelab?style=flat-square&logo=docker&logoColor=blue&color=2496ED)
 ![Docker Pulls](https://img.shields.io/docker/pulls/sara-bianchi/TTN_O_MAP_data_analysis?style=flat-square&logo=docker&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
