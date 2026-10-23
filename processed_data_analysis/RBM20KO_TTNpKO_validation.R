@@ -20,7 +20,7 @@ theme_set(theme_bw(12) +
                   panel.grid.minor = element_blank(),
                   plot.title = element_text(size = 15, face="bold", margin = margin(10,0,10,0))))
 
-##tracks for KO validation - supplementary figure 8 panel B
+##tracks for KO validation
 rawcounts_filtered <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/rawcounts_filtered.csv") %>% dplyr::select(-c(X, gene_ID, gene_name, gene_type, gene_biotype, chromosome, chr_start, gc_content))
 sums = as.data.frame(t(colSums(rawcounts_filtered)))
 bed <- read.delim("/home/shared_folder/gene_expression_data/bed_RUES2/WT_E8_TTN.bed", header=FALSE) %>% dplyr::select(-V4) %>%
@@ -283,7 +283,7 @@ merge = merge %>%
 merge_sign = merge %>% dplyr::filter(RBM20KO != "NS" | TTNpromKO != "NS" | TTNKO != "NS")
 merge_sign = merge_sign %>% dplyr::mutate(gene_name = ifelse(eCLIP == "RBM20_target", geneSymbol, ""))
 
-#splicing events of eCLIP targets correlation - supplementary figure 8 panel C
+#splicing events of eCLIP targets correlation
 lin_targets = lm(as.numeric((merge_sign %>% dplyr::filter(eCLIP == "RBM20_target"))$delta_PSI_RBM20KOvsWT) ~ as.numeric((merge_sign %>% dplyr::filter(eCLIP == "RBM20_target"))$delta_PSI_TTNpromKOvsWT))
 ggplot(merge_sign %>% dplyr::arrange(desc(eCLIP)), aes(x = delta_PSI_RBM20KOvsWT, y = delta_PSI_TTNpromKOvsWT)) + geom_point(aes(fill = eCLIP), shape = 21, size = 3, alpha = 0.7, color = "black") +
   geom_hline(aes(yintercept = 0), linetype = "dotted") + geom_vline(aes(xintercept = 0), linetype = "dotted") +
@@ -299,7 +299,7 @@ ggplot(merge_sign %>% dplyr::arrange(desc(eCLIP)), aes(x = delta_PSI_RBM20KOvsWT
 ggsave("/home/shared_folder/output_plots/linear_correlation_deltaPSI_RBM20KO_TTNKO.pdf")
 
 
-#up and downregulation correlation - supplementary figure 8 panel D
+#up and downregulation correlation
 merge_eCLIP = merge_sign %>% dplyr::mutate(sign_RBM20KO = ifelse(delta_PSI_RBM20KOvsWT > 0, "RBM20KO+", "RBM20KO-"),
                                           sign_TTNpromKO = ifelse(delta_PSI_TTNpromKOvsWT > 0, "TTNpromKO+", "TTNpromKO-"),
                                           sign_TTNKO = ifelse(delta_PSI_TTNKOvsWT > 0, "TTNKO+", "TTNKO-"), n = 1) %>%
@@ -343,7 +343,7 @@ ggplot(melt(summ_TTNKO %>% dplyr::mutate(category = paste0(sign_RBM20KO, "\n", s
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ggsave("/home/shared_folder/output_plots/enrichment_eCLIP_target_TTNKO.pdf")
 
-#wilcoxon test for effect size and sign correlation - supplementary figure 8 panel E
+#wilcoxon test for effect size and sign correlation
 melt_eCLIP = melt(merge_eCLIP %>% dplyr::select(c(variant_ID, sign_RBM20KO, delta_PSI_TTNpromKOvsWT, delta_PSI_TTNKOvsWT)))
 melt_eCLIP = melt_eCLIP %>% dplyr::mutate(sign = ifelse(sign_RBM20KO == "RBM20KO+", 1, -1)) %>% dplyr::mutate(product = value*sign)
 tab = data.frame(variable = c(), pval = c())
