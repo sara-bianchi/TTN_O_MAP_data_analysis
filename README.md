@@ -1,6 +1,5 @@
 # TTN_O_MAP_data_analysis
-![Docker Image Version](https://img.shields.io/docker/v/hedgelab/bulk_image?style=flat-square&logo=docker&logoColor=blue&color=2496ED)
-![Docker Pulls](https://img.shields.io/docker/pulls/sara-bianchi/TTN_O_MAP_data_analysis?style=flat-square&logo=docker&logoColor=white)
+![Docker Image Version](https://img.shields.io/docker/v/Docker-hedgelab%2Fbulk__image%3Aimage3?style=flat-square&logo=docker&logoColor=blue&color=2496ED)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
 scripts for reproducibility of the bioinforatic analysis of "Nascent transcript O-MAP reveals the molecular architecture of an RBM20-regulated single-locus subnuclear compartment organized around the TTN RNA", Kania, Bianchi et al.
