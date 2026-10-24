@@ -2,6 +2,7 @@
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fbulk__image%3Aimage3-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fhic__pipeline%3Aimage15-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fo__map__data__analysis%3Aimage1-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fcrispr%3Aimage1-2496ED?style=flat-square&logo=docker&logoColor=white)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
@@ -175,12 +176,16 @@ Processed data anlysis consits of different steps requiring different docker ima
         docker exec -it processed_data_analysis /bin/bash
         Rscript /home/shared_folder/splicing_analysis.R
 
-7) Enrichment of GO terms in pulldown enriched proteins. Analysis of the number of QKI and SAFB foci per cells in WT, ΔRBM20, ΔTTNpromoter, ΔRBM20-ΔTTNpromoter hESC RUES2 derived CMs. Evaluation of the transcriptional effects of the QKI, SAFB, and ELAVL1 KD compared to the factory perturbations and evaluation of gene expression in TIDs enclosed genes.
+7) Enrichment of GO terms in pulldown enriched proteins. Evaluation of the transcriptional effects of the SAFB KD compared to the factory perturbations and evaluation of gene expression in TIDs enclosed genes.
 
         docker exec -it processed_data_analysis /bin/bash
         Rscript /home/shared_folder/proteins_analysis.R
 
+8) Analysis of the number of QKI and SAFB foci per cells in WT, ΔRBM20, ΔTTNpromoter, ΔRBM20-ΔTTNpromoter hESC RUES2 derived CMs.
+
+        docker exec -it processed_data_analysis /bin/bash
+        Rscript /home/shared_folder/imaging_analysis.R
    
-For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to Refer to our GitHubs:
+For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to our GitHubs:
 - bulk RNAseq pipeline (https://github.com/sara-bianchi/Bulk_RNA_seq_pipeline)
 - Hi-C pipeline (https://github.com/sara-bianchi/HiC_pipeline)
