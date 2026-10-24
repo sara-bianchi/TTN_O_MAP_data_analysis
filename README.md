@@ -19,7 +19,7 @@ Our analyses include:
 It is highly recommanded to run all our scripts using our docker images available on the hedgelab docker repository to ensure reproducibility.
 
 ### O-MAP data processing
-For this step it is required to use the scripts in the folder O-MAP_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/O-MAP_data_processing.gz/content.
+For this step it is required to use the scripts in the folder O-MAP_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/O-MAP_data_processing.zip/content.
 Place the files and the scripts in the respective folders (RNA_ChIP_data_processing and DNA_ChIP_data_processing), make the scripts executable, and download the fastq files for the RNA ChIP pulldown and input in a subfolder RNA_ChIP_data_processing/fastq
 
 #### RNA ChIP data processing
@@ -90,7 +90,7 @@ The analysis can be run on our docker hedgelab/? and it canbe performed by runni
 
 
 ## Bulk data processing
-For this step it is required to use the scripts in the folder bulk_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/bulk_data_processing.gz/content.
+For this step it is required to use the scripts in the folder bulk_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/bulk_data_processing.zip/content.
 Place the files and the scripts in the same folder, make the scripts executable, and download the fastq files for the RUES2 CMs, WTC11 CMs and RUES2 KD CMs in a subfolder bulk_data_processing/fastq
 
 Bulk data processig consits of different steps requiring different docker images (specified below). All the steps can be run on the bulk_data_processing folder as following:
@@ -122,7 +122,7 @@ Bulk data processig consits of different steps requiring different docker images
 
 
 ## HiC data processing
-For this step it is required to use the scripts in the folder HiC_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/HiC_data_processing.gz/content.
+For this step it is required to use the scripts in the folder HiC_data_prcessing and the supporing files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/HiC_data_processing.zip/content.
 Place the files and the scripts in the same folder, make the scripts executable, and download the fastq files for the RUES2 CMs (developmental tracks and WT-ΔRBM20 day 30 CMs) in a subfolder HiC_data_processing/fastq
 
 The analysis can be run on our docker hedgelab/hic_pipleine:image15 and it canbe performed by running the following steps in the terminal from the HiC_data_processing folder:
@@ -140,7 +140,7 @@ The analysis can be run on our docker hedgelab/hic_pipleine:image15 and it canbe
 
 
 ## Processed data analysis
-For this step it is required to use the scripts in the folder processed_data_analysis and the preprocessed files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/processed_data_analysis.gz/content.
+For this step it is required to use the scripts in the folder processed_data_analysis and the preprocessed files on Zenodo at https://zenodo.org/api/records/18722155/draft/files/processed_data_analysis.zip/content.
 Place the files and the scripts in the same folder and make the scripts executable.
 
 Processed data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the bulk_data_processing folder as following:
