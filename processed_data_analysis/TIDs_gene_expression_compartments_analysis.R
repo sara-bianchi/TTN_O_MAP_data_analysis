@@ -250,7 +250,7 @@ ggsave("/home/shared_folder/output_plots/gene_length_distribution.pdf")
 #gene expression of chromatin states
 TPMnormalized_counts_modules <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/TPMnormalized_counts_modules.csv") %>% dplyr::select(-X)
 TPMcounts = melt(TPMnormalized_counts_modules)
-table <- read_excel("/home/shared_folder/chromatin_data/DGE_RUES2_data/table.xlsx")
+table <- read_excel("/home/shared_folder/gene_expression_data/DGE_RUES2_data/table.xlsx")
 colnames(TPMcounts) = c("gene_ID", "color", "gene_name", "gene_type", "sample_ID", "TPM")
 TPMcounts = TPMcounts %>% dplyr::left_join(table, by = "sample_ID")
 TPMtids = TPMcounts %>% dplyr::mutate(rep = ifelse(gene_ID %in% rep_tids_genes$geneID, "rep", ""),
@@ -262,9 +262,9 @@ ggplot(TPMtids) + geom_violin(aes(x = signature, y = log2(TPM))) + geom_boxplot(
   scale_fill_manual(values = c("#FEAF16", "#1CBE4F", "#56B4E9"))
 ggsave("/home/shared_folder/output_plots/gene_expression_distribution_RUES2_WT.pdf")
 
-TPMnormalized_counts_modules <- read.csv("/home/shared_folder/chromatin_data/DGE_WTC11_data/TPMnormalized_counts_modules.csv") %>% dplyr::select(-X)
+TPMnormalized_counts_modules <- read.csv("/home/shared_folder/gene_expression_data/DGE_WTC11_data/TPMnormalized_counts_modules.csv") %>% dplyr::select(-X)
 TPMcounts = melt(TPMnormalized_counts_modules)
-table <- read_excel("/home/shared_folder/chromatin_data/DGE_WTC11_data/table.xlsx")
+table <- read_excel("/home/shared_folder/gene_expression_data/DGE_WTC11_data/table.xlsx")
 colnames(TPMcounts) = c("gene_ID", "color", "gene_name", "gene_type", "sample_ID", "TPM")
 TPMcounts = TPMcounts %>% dplyr::left_join(table, by = "sample_ID")
 TPMtids = TPMcounts %>% dplyr::mutate(rep = ifelse(gene_ID %in% rep_tids_genes$geneID, "rep", ""),
