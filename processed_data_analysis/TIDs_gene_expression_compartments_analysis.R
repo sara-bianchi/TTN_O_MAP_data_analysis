@@ -277,9 +277,9 @@ ggplot(TPMtids) + geom_violin(aes(x = signature, y = log2(TPM))) + geom_boxplot(
 ggsave("/home/shared_folder/output_plots/gene_expression_distribution_WTC11_WT.pdf")
 
 ##gene expression in TIDs
-WTvsRBM20.KO <- read.csv("/home/shared_folder/chromatin_data/DGE_RUES2_data/WTvsRBM20.KO.csv")
-WTvsTTN.PROM.KO <- read.csv("/home/shared_folder/chromatin_data/DGE_RUES2_data/WTvsTTN.PROM.KO.csv")
-WTvsTTN.KO <- read.csv("/home/shared_folder/chromatin_data/DGE_RUES2_data/WTvsTTN.KO.csv")
+WTvsRBM20.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsRBM20.KO.csv")
+WTvsTTN.PROM.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsTTN.PROM.KO.csv")
+WTvsTTN.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsTTN.KO.csv")
 
 factory_genes_RUES2 = WTvsRBM20.KO %>% dplyr::select(c("gene_name", "gene_ID", "logFC", "adj.P.Val")) %>% dplyr::mutate(logFC = -logFC)
 colnames(factory_genes_RUES2) = c("gene_name", "gene_ID", "logFC_RBM20KO", "adj.P.Val_RBM20KO")
