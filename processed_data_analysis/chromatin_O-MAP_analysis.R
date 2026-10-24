@@ -19,7 +19,7 @@ theme_set(theme_bw(12) +
                   axis.text.x = element_text(hjust = 1)))
 
 
-##ChIP O-MAP plots - figure 2
+##ChIP O-MAP plots
 #virtual 4C normalization
 WT_chr2_178806793_178808363 <- read.delim("/home/shared_folder/chromatin_data/virtual4C_data/WT_chr2_178806793_178808363_1M.bedGraph", header=FALSE)
 sum = sum(WT_chr2_178806793_178808363$V4)
