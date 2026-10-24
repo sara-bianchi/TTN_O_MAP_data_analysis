@@ -23,7 +23,7 @@ theme_set(theme_bw(12) +
 
 ##TIDs/CIDs compartments analysis
 #TIDs compartment changes
-TIDs = read.delim("/home/shared_folder/chromatin_data/ChromHMM_data/WT_Interacting_Domains.bed", header=FALSE)
+TIDs = read.delim("/home/shared_folder/pulldown_data/chromatin_data/GSE234808_WT_Interacting_Domains.bed", header=FALSE)
 colnames(TIDs) = c("chr", "start", "end", "id")
 trans_TIDs = TIDs %>% dplyr::filter(chr != "chr2")
 
