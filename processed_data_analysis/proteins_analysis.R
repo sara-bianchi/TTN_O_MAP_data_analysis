@@ -66,9 +66,9 @@ colnames(SAFB_dge) = c("gene_ID", "gene_name", "log2FC_SAFB_KD")
 down_SAFB = (SAFB_dge %>% dplyr::filter(logFC < -2 & adj.P.Val < 0.05))$gene_ID
 up_SAFB = (SE.SAFB_KD %>% dplyr::filter(delta_PSI_SAFBKD > 0.1 & FDR_SAFBKD < 0.05))$variant_ID
 
-WTvsRBM20.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/DGE_RUES2_data/WTvsRBM20.KO.csv", row.names=1)
-WTvsTTN.PROM.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/DGE_RUES2_data/WTvsTTN.PROM.KO.csv", row.names=1)
-WTvsTTN.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/DGE_RUES2_data/WTvsTTN.KO.csv", row.names=1)
+WTvsRBM20.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsRBM20.KO.csv", row.names=1)
+WTvsTTN.PROM.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsTTN.PROM.KO.csv", row.names=1)
+WTvsTTN.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsTTN.KO.csv", row.names=1)
 
 factory_genes_RUES2 = WTvsRBM20.KO %>% dplyr::select(c("gene_name", "gene_ID", "logFC", "adj.P.Val")) %>% dplyr::mutate(logFC = -logFC)
 colnames(factory_genes_RUES2) = c("gene_name", "gene_ID", "logFC_RBM20KO", "adj.P.Val_RBM20KO")
