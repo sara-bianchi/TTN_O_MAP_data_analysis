@@ -146,8 +146,8 @@ Place the files and the scripts in the same folder and make the scripts executab
 Processed data anlysis consits of different steps requiring different docker images (specified below). All the steps can be run on the bulk_data_processing folder as following:
 1) pyGenomeTracks generation for visualization of compartments, virtual 4C tracks, O-MAP pulldown CIDs and TIDs, diferentially enriched introns and circRNAs, reads distribution on TTN and RBM20 in RUES2 CMs bulk data:
 
-       docker pull hedgelab/o_map_data_analysis:image1
-       docker run -d -v ../processed_data_analysis:/home/shared_folder --privileged=true --name=processed_data_analysis hedgelab/o_map_data_analysis:image1
+       docker pull hedgelab/o_map_data_analysis:image2
+       docker run -d -v ../processed_data_analysis:/home/shared_folder --privileged=true --name=processed_data_analysis hedgelab/o_map_data_analysis:image2
        docker exec -it processed_data_analysis /bin/bash
        /home/shared_folder/genome_tracks_generation.sh
 
@@ -176,15 +176,17 @@ Processed data anlysis consits of different steps requiring different docker ima
         docker exec -it processed_data_analysis /bin/bash
         Rscript /home/shared_folder/splicing_analysis.R
 
-7) Enrichment of GO terms in pulldown enriched proteins. Evaluation of the transcriptional effects of the SAFB KD compared to the factory perturbations and evaluation of gene expression in TIDs enclosed genes.
-
-        docker exec -it processed_data_analysis /bin/bash
-        Rscript /home/shared_folder/proteins_analysis.R
-
-8) Analysis of the number of QKI and SAFB foci per cells in WT, ΔRBM20, ΔTTNpromoter, ΔRBM20-ΔTTNpromoter hESC RUES2 derived CMs.
+7) Analysis of the number of QKI and SAFB foci per cells in WT, ΔRBM20, ΔTTNpromoter, ΔRBM20-ΔTTNpromoter hESC RUES2 derived CMs.
 
         docker exec -it processed_data_analysis /bin/bash
         Rscript /home/shared_folder/imaging_analysis.R
+
+8) Enrichment of GO terms in pulldown enriched proteins. Evaluation of the transcriptional effects of the SAFB KD compared to the factory perturbations and evaluation of gene expression in TIDs enclosed genes.
+
+        docker pull hedgelab/bulk_image:image3
+        docker run -d -v ../processed_data_analysis:/home/shared_folder --privileged=true --name=proteins_data_analysis hedgelab/bulk_image:image3
+        docker exec -it proteins_data_analysis /bin/bash
+        Rscript /home/shared_folder/proteins_analysis.R
    
 For further details on the Bulk RNA seq and HiC processing pipelines refer respectively to our GitHubs:
 - bulk RNAseq pipeline (https://github.com/sara-bianchi/Bulk_RNA_seq_pipeline)
