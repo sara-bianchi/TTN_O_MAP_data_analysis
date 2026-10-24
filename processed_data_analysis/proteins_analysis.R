@@ -59,7 +59,7 @@ ggsave("/home/shared_folder/output_plots/volcano_plot_SAFB.pdf")
 
 
 #SAFB KD
-SAFB_dge <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/KD_data/SAFB.csv", row.names=1) %>%
+SAFB_dge <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/SAFB.csv", row.names=1) %>%
   dplyr::select(c(gene_ID, gene_name, logFC))
 colnames(SAFB_dge) = c("gene_ID", "gene_name", "log2FC_SAFB_KD")
 
