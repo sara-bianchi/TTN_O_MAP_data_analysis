@@ -1,7 +1,7 @@
 # TTN_O_MAP_data_analysis
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fbulk__image%3Aimage3-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fhic__pipeline%3Aimage15-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fo__map__data__analysis%3Aimage1-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fo__map__data__analysis%3Aimage2-2496ED?style=flat-square&logo=docker&logoColor=white)
 ![Docker Image Version](https://img.shields.io/badge/Docker-hedgelab%2Fcrispr%3Aimage1-2496ED?style=flat-square&logo=docker&logoColor=white)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
@@ -34,8 +34,8 @@ RNA ChIP data processing consits of different steps requiring different docker i
    
 2) Conversion of BAM files to .bed tracks on the TTN genes, normalization on the coverage and generation of .bedGraph tracks with the log2FC pulldown/input
 
-       docker pull hedgelab/o_map_data_analysis:image1
-       docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_introns hedgelab/o_map_data_analysis:image1
+       docker pull hedgelab/o_map_data_analysis:image2
+       docker run -d -v ../RNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=RNA_ChIP_introns hedgelab/o_map_data_analysis:image2
        docker exec -it RNA_ChIP_introns /bin/bash
        /home/shared_folder/bamToBed_input.sh
        /home/shared_folder/bamToBed_pulldown.sh
@@ -83,8 +83,8 @@ RNA ChIP data processing consits of different steps requiring different docker i
 DNA ChIP data processing consists in the download of .bw track files from GEO and conversion to the .bedGraph format for circular plots generation and in the binning of chromosome 2 tracks at 100kb to enable comparison with other genomic tracks with Pearson correlation analysis.
 The analysis can be run on our docker hedgelab/? and it canbe performed by running the following steps in the terminal from the DNA_ChIP_data_processing folder:
 
-     docker pull hedgelab/o_map_data_analysis:image1
-     docker run -d -v ../DNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=DNA_ChIP hedgelab/o_map_data_analysis:image1
+     docker pull hedgelab/o_map_data_analysis:image2
+     docker run -d -v ../DNA_ChIP_data_processing:/home/shared_folder --privileged=true --name=DNA_ChIP hedgelab/o_map_data_analysis:image2
      docker exec -it DNA_ChIP /bin/bash
      /home/shared_folder/chromatin_O-MAP_analysis.sh
 
@@ -103,8 +103,8 @@ Bulk data processig consits of different steps requiring different docker images
    
 2) For RUES2 CMs onversion of BAM files to .bed tracks on the TTN and RBM20 genes
 
-       docker pull hedgelab/o_map_data_analysis:image1
-       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=RUES2_tracks hedgelab/o_map_data_analysis:image1
+       docker pull hedgelab/o_map_data_analysis:image2
+       docker run -d -v ../bulk_data_processing:/home/shared_folder --privileged=true --name=RUES2_tracks hedgelab/o_map_data_analysis:image2
        docker exec -it RUES2_tracks /bin/bash
        /home/shared_folder/bamToBed_tracks.sh
    
