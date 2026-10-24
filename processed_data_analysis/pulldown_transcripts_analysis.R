@@ -11,7 +11,10 @@ theme_set(theme_bw(12) +
                   plot.title = element_text(size=15, face="bold", margin = margin(10,0,10,0))))
 
 ##O-MAP pulldown transcripts
-#volcano plots - supplemntary figure 6 panel A
+#volcano plots
+transC_lists <- read_excel("/home/shared_folder/processed_data_analysis/chromatin_data/eCLIP_data/transC_lists.xlsx") %>%
+  dplyr::filter(HC_eCLIP == "Yes")
+
 o_map_WT_KO <- read_excel("/home/shared_folder/pulldown_data/transcripts_data/o_map_WT_KO.xlsx")
 o_map_WT_KO = o_map_WT_KO %>% dplyr::mutate(eCLIP = ifelse(Symbol %in% transC_lists$Gene, "RBM20_target", "no_target")) %>% 
   dplyr::mutate(eCLIP = ifelse(FDR < 0.05 & abs(log2FC) > log2(1.5), eCLIP, "insignificant"))
@@ -83,7 +86,7 @@ ggplot(KO_For_Volcano %>% dplyr::arrange(desc(TIDs))) + geom_point(aes(x = log2F
   ylab("-Log10 (p-value)") + xlab("Log2 (fold change O-MAP/Input)")
 ggsave("/home/shared_folder/output_plots/TIDs_volcano_KO.pdf")
 
-#venn diagrams - supplementary figure 6 panel B
+#venn diagrams
 RBM20_eCLIP_peaks <- read_excel("/home/shared_folder/chromatin_data/eCLIP_data/RBM20_eCLIP_peaks.xlsx")
 genes = RBM20_eCLIP_peaks$`Gene Symbol(s)`
 genes_f = c()
