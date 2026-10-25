@@ -59,12 +59,10 @@ ggsave("/home/shared_folder/output_plots/volcano_plot_SAFB.pdf")
 
 
 #SAFB KD
-SAFB_dge <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/SAFB.csv", row.names=1) %>%
-  dplyr::select(c(gene_ID, gene_name, logFC))
-colnames(SAFB_dge) = c("gene_ID", "gene_name", "log2FC_SAFB_KD")
+SAFB_dge <- read.csv("/home/shared_folder/gene_expression_data/DGE_KD_data/SAFB.csv", row.names=1)
 
 down_SAFB = (SAFB_dge %>% dplyr::filter(logFC < -2 & adj.P.Val < 0.05))$gene_ID
-up_SAFB = (SE.SAFB_KD %>% dplyr::filter(delta_PSI_SAFBKD > 0.1 & FDR_SAFBKD < 0.05))$variant_ID
+up_SAFB = (SAFB_dge %>% dplyr::filter(logFC > 2 & adj.P.Val < 0.05))$gene_ID
 
 WTvsRBM20.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsRBM20.KO.csv", row.names=1)
 WTvsTTN.PROM.KO <- read.csv("/home/shared_folder/gene_expression_data/DGE_RUES2_data/WTvsTTN.PROM.KO.csv", row.names=1)
@@ -80,7 +78,7 @@ colnames(ttnKO_genes) = c("gene_name", "gene_ID", "logFC_TTNKO", "adj.P.Val_TTNK
 factory_genes_RUES2 = factory_genes_RUES2 %>% dplyr::left_join(ttnKO_genes, by = c("gene_name", "gene_ID"))
 
 factory_genes_RUES2 = factory_genes_RUES2 %>%
-dplyr::mutate(SAFB_KD = ifelse(gene_ID %in% (SAFB_dge %>% dplyr::filter(col_to_plot == "down_SCR"))$gene_ID, "down_SAFB_KD", ifelse(gene_ID %in% (SAFB_dge %>% dplyr::filter(col_to_plot == "up_SAFB_KD"))$gene_ID, "up_SAFB_KD", "")))
+dplyr::mutate(SAFB_KD = ifelse(gene_ID %in% (SAFB_dge %>% down_SAFB, "down_SAFB_KD", ifelse(gene_ID %in% up_SAFB, "up_SAFB_KD", "")))
 
 ggplot() +
   geom_point(aes(x = factory_genes_RUES2$logFC_RBM20KO, y = factory_genes_RUES2$logFC_TTNpromKO), size = 2, color = "grey", alpha = 0.5) +
@@ -92,8 +90,8 @@ ggsave("/home/shared_folder/output_plots/SAFB_dge_factory_density.pdf")
 
 #TIDs GSEA
 act_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/act_genes.csv", row.names=1)
-rep_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/DGE_RUES2_data/rep_genes.csv", row.names=1)
-biv_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/DGE_RUES2_data/biv_genes.csv", row.names=1)
+rep_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/rep_genes.csv", row.names=1)
+biv_genes <- read.csv("/home/shared_folder/chromatin_data/ChromHMM_data/biv_genes.csv", row.names=1)
 
 pathway = list(tids = c(act_genes$geneID, rep_genes$geneID, biv_genes$geneID))
 
